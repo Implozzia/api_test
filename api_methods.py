@@ -4,14 +4,15 @@ import requests
 class HttpMethods:
     def __init__(self, method):
         self.method = method
+        self.link = 'https://playground.learnqa.ru/ajax/api/compare_query_type'
 
     def without_method(self):
-        response = requests.get('https://playground.learnqa.ru/ajax/api/compare_query_type').text
+        response = requests.get(self.link).text
         return print(f'Without parameter: \n{response}')
 
     def another_method(self):
         payload = {'method': self.method}
-        response = requests.head('https://playground.learnqa.ru/ajax/api/compare_query_type', data=payload)
+        response = requests.head(self.link, data=payload)
         return print(f'Method not in the list: \n{response}')
 
     def correct_method(self):
@@ -19,16 +20,16 @@ class HttpMethods:
         payload = {'method': self.method}
         if self.method == 'GET':
             print(f'Method: {self.method}')
-            response = requests.get('https://playground.learnqa.ru/ajax/api/compare_query_type', params=payload).text
+            response = requests.get(self.link, params=payload).text
             return print(f'Response: {response}')
         elif self.method == 'POST':
-            response = requests.post('https://playground.learnqa.ru/ajax/api/compare_query_type', data=payload).text
+            response = requests.post(self.link, data=payload).text
             return print(response)
         elif self.method == 'PUT':
-            response = requests.put('https://playground.learnqa.ru/ajax/api/compare_query_type', data=payload).text
+            response = requests.put(self.link, data=payload).text
             return print(response)
         elif self.method == 'DELETE':
-            response = requests.delete('https://playground.learnqa.ru/ajax/api/compare_query_type', data=payload).text
+            response = requests.delete(self.link, data=payload).text
             return print(response)
         else:
             print('Error')
@@ -43,8 +44,7 @@ class HttpMethods:
                 for key in payload[value]:
                     print(f'Parameter = {key}')
                     new_dict[value] = key
-                    response_get = requests.get('https://playground.learnqa.ru/ajax/api/compare_query_type',
-                                                params=new_dict).text
+                    response_get = requests.get(self.link, params=new_dict).text
                     print(f'Response: {response_get}')
 
         elif self.method == 'POST':
@@ -52,8 +52,7 @@ class HttpMethods:
                 for key in payload[value]:
                     print(f'Parameter = {key}')
                     new_dict[value] = key
-                    response_post = requests.post('https://playground.learnqa.ru/ajax/api/compare_query_type',
-                                                  data=new_dict).text
+                    response_post = requests.post(self.link, data=new_dict).text
                     print(f'Response: {response_post}')
 
         elif self.method == 'PUT':
@@ -61,8 +60,7 @@ class HttpMethods:
                 for key in payload[value]:
                     print(f'Parameter = {key}')
                     new_dict[value] = key
-                    response_post = requests.put('https://playground.learnqa.ru/ajax/api/compare_query_type',
-                                                 data=new_dict).text
+                    response_post = requests.put(self.link, data=new_dict).text
                     print(f'Response: {response_post}')
 
         elif self.method == 'DELETE':
@@ -70,21 +68,20 @@ class HttpMethods:
                 for key in payload[value]:
                     print(f'Parameter = {key}')
                     new_dict[value] = key
-                    response_post = requests.delete('https://playground.learnqa.ru/ajax/api/compare_query_type',
-                                                    data=new_dict).text
+                    response_post = requests.delete(self.link, data=new_dict).text
                     print(f'Response: {response_post}')
         else:
             print('Error')
 
 
-first = HttpMethods('DELETE')
-first.without_method()
+get = HttpMethods('GET')
+get.without_method()
 print()
-first.another_method()
+get.another_method()
 print()
-first.correct_method()
+get.correct_method()
 print()
-first.all_methods()
+get.all_methods()
 
 
 # У нас есть вот такой URL: https://playground.learnqa.ru/ajax/api/compare_query_type Запрашивать его можно четырьмя
