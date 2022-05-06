@@ -74,7 +74,7 @@ class HttpMethods:
             print('Error')
 
 
-get = HttpMethods('GET')
+get = HttpMethods('DELETE')
 get.without_method()
 print()
 get.another_method()
